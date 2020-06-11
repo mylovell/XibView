@@ -1,28 +1,14 @@
 //
-//  XibLabel.m
-//  Single
+//  XibImageView.m
+//  Parents
 //
-//  Created by Feng Luo on 2020/3/14.
-//  Copyright © 2020 Feng Luo. All rights reserved.
+//  Created by luofeng on 2020/5/14.
+//  Copyright © 2020 9130. All rights reserved.
 //
 
-#import "XibLabel.h"
+#import "XibImageView.h"
 
-@implementation XibLabel
-
-- (void)setFontColor:(NSString *)hex {
-    self.textColor = [self colorWithHexString:hex alpha:1];
-}
-
-- (void)setFontName:(NSString *)fontName {
-    
-    fontName = [self fontNameMap:fontName];
-    self.font = [UIFont fontWithName:fontName size:self.font.pointSize];
-}
-
-- (void)setFontSize:(NSUInteger )fontSize {
-    self.font = [self.font fontWithSize:fontSize];
-}
+@implementation XibImageView
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     self.layer.cornerRadius = cornerRadius;
@@ -39,10 +25,6 @@
     self.layer.borderColor = color.CGColor;
 }
 
-- (void)setBackColor:(NSString *)backColor {
-    UIColor *color = [self colorWithHexString:backColor alpha:1];
-    self.backgroundColor = color;
-}
 
 /**
  16进制颜色转换为UIColor
@@ -85,23 +67,6 @@
                            green:((float)g / 255.0f)
                             blue:((float)b / 255.0f)
                            alpha:opacity];
-}
-
-- (NSString *)fontNameMap:(NSString *)fontName {
-    NSDictionary *dic = @{
-        @"PingFang-SC-Heavy"        :@"PingFangSC-Semibold",
-        @"PingFang-SC-Semibold"     :@"PingFangSC-Semibold",
-        @"PingFang-SC-Bold"         :@"PingFangSC-Semibold",
-        @"PingFang-SC-Medium"       :@"PingFangSC-Medium",
-        @"PingFang-SC-Regular"      :@"PingFangSC-Regular",
-        @"PingFang-SC-Thin"         :@"PingFangSC-Thin",
-        @"PingFang-SC-Light"        :@"PingFangSC-Light",
-        @"PingFang-SC-Ultralight"   :@"PingFangSC-Ultralight"
-    };
-    if ([dic[fontName] length] != 0) {
-        fontName = dic[fontName];
-    }
-    return fontName;
 }
 
 

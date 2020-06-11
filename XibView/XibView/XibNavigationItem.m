@@ -1,47 +1,66 @@
 //
-//  XibLabel.m
-//  Single
+//  XibNavigationItem.m
+//  Parents
 //
-//  Created by Feng Luo on 2020/3/14.
-//  Copyright © 2020 Feng Luo. All rights reserved.
+//  Created by luofeng on 2020/5/7.
+//  Copyright © 2020 9130. All rights reserved.
 //
 
-#import "XibLabel.h"
+#import "XibNavigationItem.h"
 
-@implementation XibLabel
+@implementation XibNavigationItem
 
 - (void)setFontColor:(NSString *)hex {
-    self.textColor = [self colorWithHexString:hex alpha:1];
+    
+    if (!self.titleView) {
+        UILabel *label = [[UILabel alloc] init];
+        self.titleView = label;
+    }
+    
+    UILabel *label = (UILabel *)self.titleView;
+    label.textColor = [self colorWithHexString:hex alpha:1];
+    
 }
 
 - (void)setFontName:(NSString *)fontName {
     
+    if (!self.titleView) {
+        UILabel *label = [[UILabel alloc] init];
+        self.titleView = label;
+    }
+    
+    UILabel *label = (UILabel *)self.titleView;
+    UIFont *originFont = label.font;
+    
+    
     fontName = [self fontNameMap:fontName];
-    self.font = [UIFont fontWithName:fontName size:self.font.pointSize];
-}
-
-- (void)setFontSize:(NSUInteger )fontSize {
-    self.font = [self.font fontWithSize:fontSize];
-}
-
-- (void)setCornerRadius:(CGFloat)cornerRadius {
-    self.layer.cornerRadius = cornerRadius;
-    self.layer.masksToBounds = YES;
+    label.font = [UIFont fontWithName:fontName size:originFont.pointSize];
     
 }
 
-- (void)setBorderWidth:(CGFloat)borderWidth {
-    self.layer.borderWidth = borderWidth;
+- (void)setFontSize:(NSUInteger )fontSize {
+    
+    if (!self.titleView) {
+        UILabel *label = [[UILabel alloc] init];
+        self.titleView = label;
+    }
+    
+    UILabel *label = (UILabel *)self.titleView;
+    UIFont *originFont = label.font;
+    label.font = [UIFont fontWithName:originFont.fontName size:fontSize];
+    
 }
 
-- (void)setBorderColor:(NSString *)borderColor {
-    UIColor *color = [self colorWithHexString:borderColor alpha:1];
-    self.layer.borderColor = color.CGColor;
-}
-
-- (void)setBackColor:(NSString *)backColor {
-    UIColor *color = [self colorWithHexString:backColor alpha:1];
-    self.backgroundColor = color;
+-(void)setTitleContent:(NSString *)titleContent {
+    
+    if (!self.titleView) {
+        UILabel *label = [[UILabel alloc] init];
+        self.titleView = label;
+    }
+    
+    UILabel *label = (UILabel *)self.titleView;
+    label.text = titleContent;
+    
 }
 
 /**
@@ -103,6 +122,5 @@
     }
     return fontName;
 }
-
 
 @end

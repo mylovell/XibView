@@ -62,6 +62,9 @@ IB_DESIGNABLE
 // 不支持枚举类型，所有不会在xib中展示
 //@property (nonatomic, assign) IBInspectable PingFangSCName fontName1;
 
+
+@property (nonatomic, strong) IBInspectable NSString *unifySet;/// 统一设置（在子类使用，在子类中实现setter，给上面的 IBInspectable 属性赋值）
+
 @end
 
 NS_ASSUME_NONNULL_END

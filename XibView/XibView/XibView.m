@@ -12,20 +12,21 @@
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     self.layer.cornerRadius = cornerRadius;
-    
+    self.layer.masksToBounds = YES;
 }
 
 - (void)setBorderWidth:(CGFloat)borderWidth {
     self.layer.borderWidth = borderWidth;
 }
 
+
 - (void)setBorderColor:(NSString *)borderColor {
-    UIColor *color = [XibView colorWithHexString:borderColor alpha:1];
+    UIColor *color = [self colorWithHexString:borderColor alpha:1];
     self.layer.borderColor = color.CGColor;
 }
 
 - (void)setBackColor:(NSString *)backColor {
-    UIColor *color = [XibView colorWithHexString:backColor alpha:1];
+    UIColor *color = [self colorWithHexString:backColor alpha:1];
     self.backgroundColor = color;
 }
 
@@ -36,7 +37,7 @@
  @param opacity 透明度
  @return 16进制字符串对应的颜色
  */
-+(UIColor *)colorWithHexString:(NSString *)hexColor alpha:(float)opacity{
+- (UIColor *)colorWithHexString:(NSString *)hexColor alpha:(float)opacity{
     NSString * cString = [[hexColor stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
 
     // String should be 6 or 8 characters

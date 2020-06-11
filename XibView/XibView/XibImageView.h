@@ -1,32 +1,22 @@
 //
-//  XibView.h
-//  Single
+//  XibImageView.h
+//  Parents
 //
-//  Created by Feng Luo on 2020/3/14.
-//  Copyright © 2020 Feng Luo. All rights reserved.
+//  Created by luofeng on 2020/5/14.
+//  Copyright © 2020 9130. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-/*
-XibLabel 可做为父类，供其他子类继承，这样子类也享有父类的功能：
-1、实用属性可视化，（IBInspectable）
-2、界面实时更新显示。（IB_DESIGNABLE）
-
-*/
-
 IB_DESIGNABLE
 
-@interface XibView : UIView
+@interface XibImageView : UIImageView
 
 @property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
 @property (nonatomic, assign) IBInspectable CGFloat borderWidth;
 @property (nonatomic, strong) IBInspectable NSString *borderColor;
-@property (nonatomic, strong) IBInspectable NSString *backColor;// 背景颜色
-
 
 @property (nonatomic, strong) IBInspectable NSString *unifySet;/// 统一设置（在子类使用，在子类中实现setter，给上面的 IBInspectable 属性赋值）
 

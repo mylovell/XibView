@@ -1,48 +1,57 @@
 //
-//  XibLabel.m
-//  Single
+//  XibBarButtonItem.m
+//  Parents
 //
-//  Created by Feng Luo on 2020/3/14.
-//  Copyright © 2020 Feng Luo. All rights reserved.
+//  Created by luofeng on 2020/5/7.
+//  Copyright © 2020 9130. All rights reserved.
 //
 
-#import "XibLabel.h"
+#import "XibBarButtonItem.h"
 
-@implementation XibLabel
+@implementation XibBarButtonItem
 
 - (void)setFontColor:(NSString *)hex {
-    self.textColor = [self colorWithHexString:hex alpha:1];
+    
+    NSDictionary *newAttri = @{NSForegroundColorAttributeName : [self colorWithHexString:hex alpha:1]};
+    
+    NSDictionary *originAttr = [self titleTextAttributesForState:(UIControlStateNormal)];
+    
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:originAttr];
+    [mutDic addEntriesFromDictionary:newAttri];
+    
+    [self setTitleTextAttributes:mutDic forState:(UIControlStateNormal)];
 }
 
 - (void)setFontName:(NSString *)fontName {
     
+    NSDictionary *originAttr = [self titleTextAttributesForState:(UIControlStateNormal)];
+    UIFont *originFont = [originAttr valueForKey:NSFontAttributeName];
+    
+    
     fontName = [self fontNameMap:fontName];
-    self.font = [UIFont fontWithName:fontName size:self.font.pointSize];
-}
-
-- (void)setFontSize:(NSUInteger )fontSize {
-    self.font = [self.font fontWithSize:fontSize];
-}
-
-- (void)setCornerRadius:(CGFloat)cornerRadius {
-    self.layer.cornerRadius = cornerRadius;
-    self.layer.masksToBounds = YES;
+    NSDictionary *newAttri = @{NSFontAttributeName : [UIFont fontWithName:fontName size:originFont.pointSize]};
+    
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:originAttr];
+    [mutDic addEntriesFromDictionary:newAttri];
+    
+    [self setTitleTextAttributes:mutDic forState:(UIControlStateNormal)];
     
 }
 
-- (void)setBorderWidth:(CGFloat)borderWidth {
-    self.layer.borderWidth = borderWidth;
+- (void)setFontSize:(NSUInteger )fontSize {
+    
+    NSDictionary *originAttr = [self titleTextAttributesForState:(UIControlStateNormal)];
+    UIFont *originFont = [originAttr valueForKey:NSFontAttributeName];
+    
+    NSDictionary *newAttri = @{NSFontAttributeName : [UIFont fontWithName:originFont.fontName size:fontSize]};
+    
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:originAttr];
+    [mutDic addEntriesFromDictionary:newAttri];
+    
+    [self setTitleTextAttributes:mutDic forState:(UIControlStateNormal)];
+    
 }
 
-- (void)setBorderColor:(NSString *)borderColor {
-    UIColor *color = [self colorWithHexString:borderColor alpha:1];
-    self.layer.borderColor = color.CGColor;
-}
-
-- (void)setBackColor:(NSString *)backColor {
-    UIColor *color = [self colorWithHexString:backColor alpha:1];
-    self.backgroundColor = color;
-}
 
 /**
  16进制颜色转换为UIColor
@@ -103,6 +112,5 @@
     }
     return fontName;
 }
-
 
 @end
