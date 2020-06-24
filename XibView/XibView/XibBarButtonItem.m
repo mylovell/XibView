@@ -12,7 +12,8 @@
 
 - (void)setFontColor:(NSString *)hex {
     
-    NSDictionary *newAttri = @{NSForegroundColorAttributeName : [self colorWithHexString:hex alpha:1]};
+    UIColor *newColor = [XibBarButtonItem colorWithHexString:hex alpha:1];
+    NSDictionary *newAttri = @{NSForegroundColorAttributeName : newColor};
     
     NSDictionary *originAttr = [self titleTextAttributesForState:(UIControlStateNormal)];
     
@@ -20,6 +21,9 @@
     [mutDic addEntriesFromDictionary:newAttri];
     
     [self setTitleTextAttributes:mutDic forState:(UIControlStateNormal)];
+    
+    // 点击时候的颜色
+    self.tintColor = newColor;
 }
 
 - (void)setFontName:(NSString *)fontName {
@@ -60,7 +64,7 @@
  @param opacity 透明度
  @return 16进制字符串对应的颜色
  */
-- (UIColor *)colorWithHexString:(NSString *)hexColor alpha:(float)opacity{
++(UIColor *)colorWithHexString:(NSString *)hexColor alpha:(float)opacity{
     NSString * cString = [[hexColor stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
 
     // String should be 6 or 8 characters
@@ -105,7 +109,17 @@
         @"PingFang-SC-Regular"      :@"PingFangSC-Regular",
         @"PingFang-SC-Thin"         :@"PingFangSC-Thin",
         @"PingFang-SC-Light"        :@"PingFangSC-Light",
-        @"PingFang-SC-Ultralight"   :@"PingFangSC-Ultralight"
+        @"PingFang-SC-Ultralight"   :@"PingFangSC-Ultralight",
+        
+        @"Heavy"        :@"PingFangSC-Semibold",
+        @"Semibold"     :@"PingFangSC-Semibold",
+        @"Bold"         :@"PingFangSC-Semibold",
+        @"Medium"       :@"PingFangSC-Medium",
+        @"Regular"      :@"PingFangSC-Regular",
+        @"Thin"         :@"PingFangSC-Thin",
+        @"Light"        :@"PingFangSC-Light",
+        @"Ultralight"   :@"PingFangSC-Ultralight"
+        
     };
     if ([dic[fontName] length] != 0) {
         fontName = dic[fontName];

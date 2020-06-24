@@ -4,7 +4,7 @@
 //
 //  Created by luofeng on 2020/5/7.
 //  Copyright © 2020 9130. All rights reserved.
-//
+// 导航栏上的按钮
 
 #import <UIKit/UIKit.h>
 
@@ -25,9 +25,6 @@ PingFangSC-Thin
 @property (nonatomic, assign) IBInspectable NSString *fontName;
 @property (nonatomic, assign) IBInspectable NSUInteger fontSize;
 @property (nonatomic, strong) IBInspectable NSString *fontColor;// 十六进制的颜色，比如 123456
-
-
-@property (nonatomic, strong) IBInspectable NSString *unifySet;/// 统一设置（在子类使用，在子类中实现setter，给上面的 IBInspectable 属性赋值）
 
 @end
 
